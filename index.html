@@ -815,6 +815,9 @@
 			</div>
 
 			<div class="row" id="doctor-member-list"></div>
+			<div class="section-title">
+				<button type="button" class="default-btn" id="load-more-button">Load More</button>
+			</div>
 		</div>
 	</section>
 	<!-- End Team Area -->
@@ -1294,14 +1297,16 @@
 	<!-- Jquery Slim JS -->
 	<script>
 		$(document).ready(function () {
-			function doctorMemberList() {
+			let currentPage = 1;
+
+			function doctorMemberList(page) {
 				$.ajax({
-					url:
-						"https://childdr-nodejs1.onrender.com/users/doctor-member-list",
+					url: "http://localhost:5500/users/doctor-member-list",
 					method: "POST",
 					dataType: "json",
 					data: {
 						code: "778899",
+						page: page // Include the page parameter in the request
 					},
 					success: function (responseData) {
 						// Request was successful
@@ -1319,65 +1324,65 @@
 			function populateDoctorMemberList(data) {
 				var doctorListContainer = $("#doctor-member-list");
 
-				// Clear any existing content
-				doctorListContainer.empty();
-
 				// Iterate over the data and create doctor elements
 				$.each(data, function (index, item) {
-					console.log(item);
 					var doctorElement = `
-						<div class="col-lg-3 col-sm-6">
-						<div class="team-card">
-							<a href="doctors.html"
-								><img
-									src="https://lindamood.net/wp-content/uploads/2019/10/Blank-profile-image-731x1024.jpg"
-									alt="Image"
-							/></a>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="team-card">
+                        <a href="doctors.html">
+                            <img
+                                src="https://lindamood.net/wp-content/uploads/2019/10/Blank-profile-image-731x1024.jpg"
+                                alt="Image"
+                            />
+                        </a>
 
-							<div class="content">
-								<h3>
-									<a href="doctors.html"
-										>Dr. ${item.firstName} ${item.lastName}</a
-									>
-								</h3>
-								<span class='text-uppercase'>${item.department}</span>
-								<br>
-								<span class='text-uppercase'>${item.qualifications}</span>
-								<p class='text-uppercase'>&#8377; ${item.price}</p>
-								<ul class="social-link">
-									<li>
-										<a href="#" target="_blank">
-											<i class="bx bxl-facebook"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" target="_blank">
-											<i class="bx bxl-twitter"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" target="_blank">
-											<i class="bx bxl-linkedin"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" target="_blank">
-											<i class="bx bxl-instagram"></i>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-						`;
+                        <div class="content">
+                            <h3>
+                                <a href="doctors.html">Dr. ${item.firstName} ${item.lastName}</a>
+                            </h3>
+                            <span class='text-uppercase'>${item.department}</span>
+                            <br>
+                            <span class='text-uppercase'>${item.qualifications}</span>
+                            <p class='text-uppercase'>&#8377; ${item.price}</p>
+                            <ul class="social-link">
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <i class="bx bxl-facebook"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <i class="bx bxl-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <i class="bx bxl-linkedin"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <i class="bx bxl-instagram"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
 
 					doctorListContainer.append(doctorElement);
 				});
 			}
 
-			// Call the doctorMemberList function to populate the doctor member list when the page loads
-			doctorMemberList();
+			doctorMemberList(currentPage);
+
+			$("#load-more-button").click(function () {
+				currentPage++;
+				doctorMemberList(currentPage);
+			});
 		});
+
 	</script>
 
 	<script src="assets/js/bootstrap.bundle.min.js"></script>
