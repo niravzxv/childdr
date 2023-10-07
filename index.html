@@ -1309,13 +1309,11 @@
 						page: page // Include the page parameter in the request
 					},
 					success: function (responseData) {
-						// Request was successful
+						// Request was successful, populate the doctor list
 						populateDoctorMemberList(responseData.rows);
 					},
 					error: function (xhr, status, error) {
-						// Request failed
-						console.log(error);
-						console.log("Request failed. Status:", status);
+						document.getElementById("validator-message").innerHTML = xhr.responseText;
 					},
 				});
 			}
