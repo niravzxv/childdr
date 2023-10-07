@@ -1310,7 +1310,7 @@
 					},
 					success: function (responseData) {
 						// Request was successful
-						populateDoctorMemberList(responseData);
+						populateDoctorMemberList(responseData.rows);
 					},
 					error: function (xhr, status, error) {
 						// Request failed
