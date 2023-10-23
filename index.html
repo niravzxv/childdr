@@ -1019,6 +1019,9 @@
 
 			<div class="row" id="blog-list">
 			</div>
+			<div class="section-title">
+				<button type="button" class="default-btn" id="blog-load-more-button">Load More</button>
+			</div>
 		</div>
 	</section>
 	<!-- End Blog Area -->
@@ -1043,6 +1046,9 @@
 			</div>
 
 			<div class="row" id="event-list">
+			</div>
+			<div class="section-title">
+				<button type="button" class="default-btn" id="event-load-more-button">Load More</button>
 			</div>
 		</div>
 	</section>
@@ -1431,7 +1437,7 @@
 
 			loadBlogList(currentPage);
 
-			$("#load-more-button").click(function () {
+			$("#blog-load-more-button").click(function () {
 				currentPage++;
 				loadBlogList(currentPage);
 			});
@@ -1491,7 +1497,7 @@
 
 			loadEventList(currentPage);
 
-			$("#load-more-button").click(function () {
+			$("#event-load-more-button").click(function () {
 				currentPage++;
 				loadEventList(currentPage);
 			});
